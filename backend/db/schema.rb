@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_065953) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_26_172037) do
   create_table "calories", force: :cascade do |t|
     t.date "date", null: false
     t.integer "meal1"
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_065953) do
     t.integer "meal3"
     t.integer "meal4"
     t.integer "meal5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "weights", force: :cascade do |t|
+    t.date "date", null: false
+    t.float "weight", null: false
+    t.text "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

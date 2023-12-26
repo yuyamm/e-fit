@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
   scope :api do
     resources :calories, only: [:index, :show, :create, :update, :destroy]
+    resources :weights, only: [:index, :show, :create, :update, :destroy]
   end
 end
