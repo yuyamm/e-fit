@@ -111,3 +111,33 @@ export async function createDailyWeight(formData: FormData) {
   revalidatePath('/dashboard/weights')
   redirect('/dashboard/weights')
 }
+
+export async function updateDailyWeight(formData: FormData) {
+  'use server'
+
+  const rawFormData = {
+    weight: {
+      date: formData.get('date'),
+      weight: formData.get('weight'),
+      memo: formData.get('memo')
+    }
+  }
+  const id = formData.get('id')
+
+  // エラー処理を後で書く
+  const res = await fetch(`http://localhost:5000/api/weights/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(rawFormData),
+    cache: 'no-cache'
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to update calorie data')
+  }
+
+  revalidatePath('/dashboard/weights')
+  redirect('/dashboard/weights')
+}
