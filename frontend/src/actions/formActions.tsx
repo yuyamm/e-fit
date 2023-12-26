@@ -82,3 +82,32 @@ export async function deleteDailyCalorie(id: number) {
   revalidatePath('/dashboard/calories')
   redirect('/dashboard/calories')
 }
+
+export async function createDailyWeight(formData: FormData) {
+  'use server'
+
+  const rawFormData = {
+    weight: {
+      date: formData.get('date'),
+      weight: formData.get('weight'),
+      memo: formData.get('memo')
+    }
+  }
+
+  // エラー処理を後で書く
+  const res = await fetch('http://localhost:5000/api/weights', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(rawFormData),
+    cache: 'no-cache'
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to save calorie data')
+  }
+
+  revalidatePath('/dashboard/weights')
+  redirect('/dashboard/weights')
+}
