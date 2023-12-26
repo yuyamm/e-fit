@@ -2,7 +2,7 @@
 
 import { Button, Stack, TextField, Typography } from "@mui/material";
 
-import { updateDailyWeight } from '@/actions/formActions'
+import { updateDailyWeight, deleteDailyWeight } from '@/actions/formActions'
 
 type UpdateWeightFormProps = {
   id: number
@@ -22,11 +22,11 @@ export default function UpdateWeightForm({ id, date, weight, memo }: UpdateWeigh
         <TextField id="outlined-basic" label="メモ" variant="outlined" name="memo" defaultValue={memo} />
         <Button variant="contained" type="submit">Submit</Button>
       </Stack>
-      {/* <Stack width={560} gap="24px" aria-labelledby="login_heading">
+      <Stack width={560} gap="24px" aria-labelledby="login_heading">
         <Button variant="contained" color="warning" onClick={async () => {
           await deleteDailyWeight(id)
         }}>Delete</Button>
-      </Stack> */}
+      </Stack>
     </Stack>
   )
 }

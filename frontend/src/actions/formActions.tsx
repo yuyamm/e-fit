@@ -141,3 +141,18 @@ export async function updateDailyWeight(formData: FormData) {
   revalidatePath('/dashboard/weights')
   redirect('/dashboard/weights')
 }
+
+export async function deleteDailyWeight(id: number) {
+  // エラー処理を後で書く
+  const res = await fetch(`http://localhost:5000/api/weights/${id}`, {
+    method: 'DELETE',
+    cache: 'no-cache'
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to delete calorie data')
+  }
+
+  revalidatePath('/dashboard/weights')
+  redirect('/dashboard/weights')
+}

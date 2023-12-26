@@ -29,6 +29,15 @@ class WeightsController < ApplicationController
     end
   end
 
+  def destroy
+    weight = Weight.find(params[:id])
+    if weight.destroy
+      head :no_content
+    else
+      render json: { error: weight.errors.messages }, status: 422
+    end
+  end
+
   private
 
   def weight_params
