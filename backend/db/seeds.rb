@@ -18,3 +18,11 @@
     meal5: 1000
   )
 end
+
+[1, 2, 3].each do |val|
+  Weight.create!(
+    date: Date.new(2023, 12, val),
+    weight: 80.0,
+    memo: "memo #{val}"
+  )
+end
