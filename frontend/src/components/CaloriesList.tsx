@@ -23,24 +23,6 @@ type CaloriesListProps = {
 
 export default function CaloriesList ({data} : {data: CaloriesListProps}) {
   return (
-    // <table>
-    //   <thead>
-    //     <tr>
-    //       <th>日付</th>
-    //       <th>meal1</th>
-    //       <th>meal2</th>
-    //       <th>meal3</th>
-    //       <th>meal4</th>
-    //       <th>meal5</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {data.map((dailyCalorie, index) => (
-    //       <Calorie key={index} date={dailyCalorie.date} {...dailyCalorie.calories} />
-    //     ))}
-    //   </tbody>
-    // </table>
-
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
