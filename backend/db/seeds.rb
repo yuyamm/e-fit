@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+[1, 2, 3].each do |val|
+  Calorie.create!(
+    date: Date.new(2023, 12, val),
+    meal1: 1000,
+    meal2: 1000,
+    meal3: 1000,
+    meal4: 1000,
+    meal5: 1000
+  )
+end
