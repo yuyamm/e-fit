@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   scope :api do
-    resources :calories, only: [:index]
+    resources :calories, only: [:index, :create]
   end
 end

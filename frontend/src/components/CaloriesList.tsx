@@ -1,4 +1,5 @@
 import React from "react"
+import Link from 'next/link'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

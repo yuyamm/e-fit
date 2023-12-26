@@ -1,5 +1,6 @@
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import Link from 'next/link'
 
 type CalorieProps = {
   date: string
@@ -16,7 +17,7 @@ export default function Calorie({date, meal1, meal2, meal3, meal4, meal5}: Calor
       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
       <TableCell component="th" scope="row">
-        {date}
+      <Link href={`/management/calories?date=${date}`}>{date}</Link>
       </TableCell>
       <TableCell align="right">{meal1}</TableCell>
       <TableCell align="right">{meal2}</TableCell>
