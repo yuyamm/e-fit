@@ -5,7 +5,6 @@ async function getData() {
   // そもそもfetch apiがrejectedされたときのエラー処理を後で書く
   const res = await fetch('http://localhost:5000/api/calories', { cache: "no-cache" })
  
-  // エラーバウンダリーが必要
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -13,14 +12,14 @@ async function getData() {
   type ApiResponse = {
     data: [
       {
-        id: number,
-        type: "calorie",
+        id: number
+        type: "calorie"
         attributes: {
-          date: string,
-          meal1?: number,
-          meal2?: number,
-          meal3?: number,
-          meal4?: number,
+          date: string
+          meal1?: number
+          meal2?: number
+          meal3?: number
+          meal4?: number
           meal5?: number
         }
       }
@@ -28,6 +27,7 @@ async function getData() {
   }
 
   type SerializedJson = {
+    id: number
     date: string
     calories: {
       meal1?: number
@@ -44,6 +44,7 @@ async function getData() {
     // console.log(item.attributes)
     return (
       {
+        id: item.id,
         date: item.attributes.date,
         calories: {
           meal1: item.attributes.meal1,

@@ -1,5 +1,4 @@
 import React from "react"
-import Link from 'next/link'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,6 +11,7 @@ import Calorie from "@/components/Calorie"
 
 
 type CaloriesListProps = {
+  id: number
   date: string
   calories: {
     meal1?: number
@@ -37,7 +37,7 @@ export default function CaloriesList ({data} : {data: CaloriesListProps}) {
         </TableHead>
         <TableBody>
           {data.map((dailyCalorie, index) => (
-            <Calorie key={index} date={dailyCalorie.date} {...dailyCalorie.calories} />
+            <Calorie key={index} id={dailyCalorie.id} date={dailyCalorie.date} {...dailyCalorie.calories} />
           ))}
         </TableBody>
       </Table>
