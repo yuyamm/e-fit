@@ -156,3 +156,7 @@ export async function deleteDailyWeight(id: number) {
   revalidatePath('/dashboard/weights')
   redirect('/dashboard/weights')
 }
+
+export async function createUserWithOAuth(formData: FormData) {
+  
+}

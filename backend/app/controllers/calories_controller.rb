@@ -39,6 +39,7 @@ class CaloriesController < ApplicationController
   end
 
   private
+  
   def calorie_params
     params.require(:calorie).permit(:date, :meal1, :meal2, :meal3, :meal4, :meal5)
   end

@@ -26,3 +26,13 @@ end
     memo: "memo #{val}"
   )
 end
+
+user = User.create!(
+  name: 'testUser'
+)
+
+DatabaseAuth.create!(
+  user_id: user.id,
+  email: 'test@test.com',
+  password: 'password',
+)
