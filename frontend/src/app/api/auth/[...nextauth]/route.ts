@@ -96,6 +96,12 @@ const handler = NextAuth({
 
       }
       return true
+    },
+    async jwt({token, user, account, profile, isNewUser}) {
+      if (account?.provider === 'google') {
+        token.provider = account.provider
+      }
+      return token
     }
   }
 })

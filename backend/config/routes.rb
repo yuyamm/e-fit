@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 
   
   scope :api do
-    devise_for :database_auth, skip: [:registrations, :passwords], controllers: {
+    devise_for :database_auth, skip: [:passwords], controllers: {
       sessions: 'database_auth/sessions',
+      registrations: 'database_auth/registrations'
     }
     post 'google_auth/sign_in', to: 'google_auth#create'
     patch 'users/me', to: 'users#update'

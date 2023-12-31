@@ -10,9 +10,20 @@ class DatabaseAuth::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    build_resource(sign_up_params)
+    user = User.new(user_params)
+    ActiveRecord::Base.transaction do
+      user.save!
+      resource.user = user
+      resource.save!
+      user_json = user.as_json(only: [:name]).merge(resource.as_json(only: [:email]))
+      render json: { user: user_json}, status: :created
+    rescue ActiveRecord::RecordInvalid => e
+      Rails.logger.error(e.record.errors.messages)
+      render json: { errors: e.record.errors.messages }, status: :unprocessable_entity
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -38,7 +49,7 @@ class DatabaseAuth::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -59,4 +70,8 @@ class DatabaseAuth::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def user_params
+    params.require(:user).permit(:name)
+  end
 end

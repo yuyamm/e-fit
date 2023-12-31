@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { signIn } from 'next-auth/react'
 
 export async function createDailyCalorie(formData: FormData) {
   'use server'
@@ -159,4 +160,62 @@ export async function deleteDailyWeight(id: number) {
 
 export async function createUserWithOAuth(formData: FormData) {
   
+}
+
+export async function updateUserWithOAuth(formData: FormData) {
+  const rawFormData = {
+    user: {
+      name: formData.get('name')
+    }
+  }
+
+  try {
+    const res = await fetch('http://localhost:5000/api/users/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rawFormData)
+    })
+  
+    if (!res.ok) {
+      throw new Error('Fetch failed with status code ' + res.status)
+    }
+  } catch (error) {
+    console.error('Network error or problem with fetch request in UpdateUserWithOAuth', error)
+    throw new Error('Network error or problem with fetch request in saving username')
+  }
+
+  redirect('/dashboard/weights')
+}
+
+export async function signupUserAccount(formData: FormData) {
+  const rawFormData = {
+    user: {
+      name: formData.get('name')
+    },
+    database_auth: {
+      email: formData.get('email'),
+      password: formData.get('password')
+    }
+  }
+
+  try {
+    const res = await fetch('http://localhost:5000/api/database_auth/sign_up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(rawFormData)
+    })
+  
+    if (!res.ok) {
+      throw new Error('Fetch failed with status code ' + res.status)
+    }
+  } catch (error) {
+    console.error('Network error or problem with fetch request in singupUserAccount', error)
+    throw new Error('Network error or problem with fetch request in signup')
+  }
+
+  signIn
 }

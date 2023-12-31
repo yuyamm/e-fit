@@ -11,7 +11,7 @@ class GoogleAuthController < ApplicationController
         response_json = user.as_json(only: [:id, :name]).merge(google_auth.as_json(only: [:uid, :email]))
         render json: response_json, status: :created
       rescue ActiveRecord::RecordInvalid => e
-          render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: e.record.errors.messages }, status: :unprocessable_entity
       end
     else
       render json: { message: "already exists" }, status: :ok
